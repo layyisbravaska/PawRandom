@@ -1,0 +1,663 @@
+/* 1. GLOBAL VARIABLES */
+:root {
+  --color-primary: #697b60;
+  --color-primary-dark: #526747;
+  --color-primary-border: #55694f;
+  --color-background: #f7f5ef;
+  --color-text: #263d32;
+  --color-text-muted: #687568;
+  --color-gold: #a8861c;
+  --color-image-background: #e6e9df;
+  --font-main: "Segoe UI", sans-serif;
+  --shadow-card: 0 12px 30px rgba(38, 61, 50, 0.08);
+  --shadow-button: 0 5px 14px rgba(66, 85, 53, 0.16);
+}
+
+/* 2. BASE STYLES */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background: var(--color-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary-dark);
+  outline-offset: 4px;
+}
+
+/* 3. NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 8%;
+  background: var(--color-primary);
+  color: var(--color-background);
+  border-bottom: 3px solid var(--color-primary-border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--color-background);
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.paw-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--color-background);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  color: inherit;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: var(--color-background);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.75;
+  color: var(--color-text);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  background: transparent;
+  color: var(--color-background);
+  border: 1px solid rgba(247, 245, 239, 0.6);
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 21px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 4. HERO SECTION */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: calc(100svh - 79px);
+  padding: 80px 10%;
+  overflow: hidden;
+  background-color: var(--color-background);
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--color-background) 0%,
+      rgba(247, 245, 239, 0.98) 32%,
+      rgba(247, 245, 239, 0.76) 49%,
+      rgba(247, 245, 239, 0.08) 75%,
+      rgba(247, 245, 239, 0) 100%
+    ),
+    url("/images/dog-hero.jpeg");
+  background-position:
+    center,
+    right center;
+  background-repeat: no-repeat;
+  background-size:
+    cover,
+    auto 100%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 540px;
+}
+
+.hero-label,
+.section-label {
+  margin: 0 0 18px;
+  color: var(--color-gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  line-height: 1.6;
+}
+
+.hero-content h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(42px, 5.2vw, 68px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -2px;
+}
+
+.hero-description {
+  max-width: 430px;
+  margin: 24px 0 30px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 25px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-button);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(38, 61, 50, 0.16);
+}
+
+/* 5. DOG EXPLORER */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 88px 24px 96px;
+  text-align: center;
+  background: var(--color-background);
+}
+
+.dog-explorer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+  scroll-margin-top: 24px;
+}
+
+.dog-explorer .section-label {
+  margin-bottom: 12px;
+}
+
+.dog-explorer h2,
+.about-section h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(27px, 3vw, 36px);
+  line-height: 1.25;
+  letter-spacing: -0.8px;
+}
+
+.dog-explorer > p:not(.section-label):not(.error) {
+  max-width: 510px;
+  margin: 16px 0 0;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* 6. DOG IMAGE */
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 460px;
+  height: 310px;
+  margin: 32px 0 26px;
+  overflow: hidden;
+  background: var(--color-image-background);
+  border: 1px solid #d9dfd1;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.image-container p {
+  padding: 20px;
+  color: #5c6e55;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 7. BUTTONS AND ERRORS */
+.main-content button {
+  max-width: 100%;
+  padding: 14px 24px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  box-shadow: var(--shadow-button);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.main-content button:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(38, 61, 50, 0.16);
+}
+
+.main-content button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+.error {
+  margin: 0 0 14px;
+  color: #a33d35;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 8. BREED SELECTOR */
+.breed-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 36px;
+}
+
+.breed-selector label {
+  align-self: flex-start;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.breed-selector select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: #ffffff;
+  color: var(--color-text);
+  border: 1px solid #d9dfd1;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.breed-selector select:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* 9. ABOUT SECTION */
+.about-section {
+  width: calc(100% - 48px);
+  max-width: 760px;
+  margin: 0 auto 88px;
+  padding: 42px 40px;
+  background: var(--color-image-background);
+  border: 1px solid #d9dfd1;
+  border-radius: 14px;
+  scroll-margin-top: 24px;
+}
+
+.about-section .section-label {
+  margin-bottom: 12px;
+}
+
+.about-section h2 {
+  font-size: clamp(25px, 3vw, 32px);
+}
+
+.about-section p:not(.section-label) {
+  margin: 16px 0 0;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+/* 10. FOOTER */
+.footer {
+  padding: 24px 16px;
+  text-align: center;
+  background: var(--color-text);
+  color: #e7ebdf;
+  border-top: 3px solid var(--color-primary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+/* 11. TABLET */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .navbar {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .hero {
+    padding: 70px 7%;
+    background-position:
+      center,
+      right top;
+    background-size:
+      cover,
+      auto 90%;
+  }
+
+  .hero-content {
+    max-width: 480px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(42px, 5.5vw, 58px);
+  }
+
+  .main-content {
+    padding: 72px 24px 80px;
+  }
+}
+
+/* 12. MOBILE */
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 17px 20px;
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: 21px;
+  }
+
+  .paw-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .navbar-subtitle {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    width: 100%;
+    padding: 12px 0 6px 4px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 690px;
+    min-height: max(690px, calc(100svh - 68px));
+    align-items: flex-start;
+    padding: 60px 25px 300px;
+    background-image:
+      linear-gradient(
+        to top,
+        var(--color-background) 0%,
+        rgba(247, 245, 239, 0.98) 34%,
+        rgba(247, 245, 239, 0.72) 52%,
+        rgba(247, 245, 239, 0.04) 75%,
+        rgba(247, 245, 239, 0) 100%
+      ),
+      url("/images/dog-hero.jpeg");
+    background-position:
+      center,
+      right top;
+    background-size:
+      cover,
+      auto 62%;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-label {
+    margin-bottom: 14px;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(39px, 10vw, 52px);
+    letter-spacing: -1.5px;
+  }
+
+  .hero-description {
+    max-width: 380px;
+    margin: 19px 0 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .hero-button {
+    min-height: 46px;
+    padding: 12px 20px;
+  }
+
+  .main-content {
+    padding: 64px 20px 72px;
+  }
+
+  .dog-explorer h2 {
+    font-size: 29px;
+  }
+
+  .dog-explorer > p:not(.section-label):not(.error) {
+    font-size: 14px;
+  }
+
+  .image-container {
+    height: 270px;
+    margin: 26px 0 22px;
+  }
+
+  .breed-selector {
+    margin-top: 30px;
+  }
+
+  .main-content button {
+    padding: 13px 19px;
+  }
+
+  .about-section {
+    width: calc(100% - 40px);
+    margin-bottom: 64px;
+    padding: 30px 24px;
+  }
+
+  .about-section h2 {
+    font-size: 27px;
+  }
+
+  .about-section p:not(.section-label) {
+    font-size: 14px;
+  }
+}
+
+/* 13. EXTRA SMALL SCREENS */
+@media (max-width: 360px) {
+  .navbar {
+    padding: 16px 14px;
+  }
+
+  .brand {
+    font-size: 19px;
+  }
+
+  .hero {
+    padding: 48px 18px 270px;
+    background-size:
+      cover,
+      auto 56%;
+  }
+
+  .hero-content h1 {
+    font-size: 37px;
+  }
+
+  .main-content {
+    padding: 52px 14px 60px;
+  }
+
+  .image-container {
+    height: 230px;
+  }
+
+  .main-content button {
+    padding: 12px 15px;
+  }
+
+  .about-section {
+    width: calc(100% - 28px);
+    padding: 26px 19px;
+  }
+
+  .footer {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* 14. REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
